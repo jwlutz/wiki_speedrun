@@ -1,13 +1,3 @@
----
-title: Wikipedia Speedrun
-emoji: 🏃
-colorFrom: green
-colorTo: blue
-sdk: docker
-pinned: false
-license: mit
----
-
 # Wikipedia Speedrun Benchmark
 
 A benchmark comparing AI agents playing the **Wikipedia Speedrun** game - navigating from one Wikipedia article to another using only the links on each page.
