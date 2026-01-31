@@ -29,7 +29,7 @@ We tested 15 AI agents across 35 unique problems, totaling 420+ games.
 
 ### Cost vs Performance
 
-![Cost vs Performance](docs/images/pareto.png)
+![Cost vs Performance](https://raw.githubusercontent.com/jwlutz/wiki_speedrun/master/docs/images/pareto.png)
 
 Points on the yellow Pareto frontier represent optimal cost-performance tradeoffs. Embedding models (green) are free while LLM models (blue) cost per API call.
 
@@ -37,16 +37,16 @@ Points on the yellow Pareto frontier represent optimal cost-performance tradeoff
 
 ### Win Rate by Agent
 
-![Win Rate](docs/images/win_rate.png)
+![Win Rate](https://raw.githubusercontent.com/jwlutz/wiki_speedrun/master/docs/images/win_rate.png)
 
 ### Click Distribution
 
-![Clicks](docs/images/clicks.png)
+![Clicks](https://raw.githubusercontent.com/jwlutz/wiki_speedrun/master/docs/images/clicks.png)
 
 ### Efficiency: Clicks vs Time
 
-![Efficiency](docs/images/efficiency.png)
+![Efficiency](https://raw.githubusercontent.com/jwlutz/wiki_speedrun/master/docs/images/efficiency.png)
 
 ### Win Rate by Difficulty
 
-![Difficulty](docs/images/difficulty.png)
+![Difficulty](https://raw.githubusercontent.com/jwlutz/wiki_speedrun/master/docs/images/difficulty.png)
