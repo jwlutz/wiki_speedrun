@@ -64,5 +64,3 @@ ENV/
 .DS_Store
 Thumbs.db
 data/faiss_index.bin
-data/faiss_index.bin
-docs/images/
