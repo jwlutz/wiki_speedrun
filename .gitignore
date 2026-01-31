@@ -63,3 +63,5 @@ ENV/
 # OS
 .DS_Store
 Thumbs.db
+data/faiss_index.bin
+data/faiss_index.bin
