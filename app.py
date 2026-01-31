@@ -125,7 +125,11 @@ def fetch_wiki_page(title: str) -> tuple[str, list[str]]:
 
     encoded = urllib.parse.quote(title.replace(" ", "_"))
     url = f"https://en.wikipedia.org/api/rest_v1/page/html/{encoded}"
-    resp = requests.get(url, headers={"User-Agent": "WikiSpeedrun/1.0"}, timeout=15)
+    headers = {
+        "User-Agent": "WikiSpeedrun/1.0 (https://huggingface.co/spaces/jwlutz/wiki-speedrun; educational benchmark project)",
+        "Accept": "text/html,application/xhtml+xml",
+    }
+    resp = requests.get(url, headers=headers, timeout=30)
     resp.raise_for_status()
 
     soup = BeautifulSoup(resp.text, "html.parser")
