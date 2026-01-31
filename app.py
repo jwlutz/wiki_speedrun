@@ -989,14 +989,14 @@ def watch_start_game():
     )
     _ai_games[game_id] = game
 
-    session["ai_game_id"] = game_id
-
-    return redirect(url_for("watch_game"))
+    # Use URL params instead of session (HF Spaces doesn't preserve cookies)
+    return redirect(url_for("watch_game", gid=game_id))
 
 
 @app.route("/watch/game")
 def watch_game():
-    game_id = session.get("ai_game_id")
+    # Read game_id from URL params (HF Spaces doesn't preserve cookies)
+    game_id = request.args.get("gid", "")
     if not game_id or game_id not in _ai_games:
         return redirect(url_for("watch_start"))
 
@@ -1043,6 +1043,9 @@ def watch_game():
         </div>
         """
 
+    # URL-encode the game_id for use in URLs
+    gid_encoded = urllib.parse.quote(game_id, safe='')
+
     content = f"""
     <div class="header">
         <h1>Watch AI Play</h1>
@@ -1053,7 +1056,7 @@ def watch_game():
         <div class="stat"><span>Target:</span> <span class="target">{game.target}</span></div>
         <div class="stat"><span>Clicks:</span> <span class="stat-value">{clicks}</span></div>
         <div class="stat"><span>Time:</span> <span class="stat-value" id="timer">{elapsed:.1f}s</span></div>
-        <a href="/watch/stop" class="btn btn-danger" style="margin-left:auto;">Stop</a>
+        <a href="/watch/stop?gid={gid_encoded}" class="btn btn-danger" style="margin-left:auto;">Stop</a>
     </div>
     <div class="path">{' -> '.join(game.path)}</div>
     {ai_info}
@@ -1079,6 +1082,7 @@ def watch_game():
     </style>
     <script>
         const startTime = {game.start_time};
+        const gameId = "{gid_encoded}";
 
         // Update timer
         setInterval(() => {{
@@ -1087,17 +1091,17 @@ def watch_game():
         }}, 100);
 
         // AI step: get choice, scroll to it, highlight, then advance
-        fetch('/watch/step')
+        fetch('/watch/step?gid=' + gameId)
             .then(r => r.json())
             .then(data => {{
                 if (data.done || data.error) {{
-                    location.reload();
+                    location.href = '/watch/game?gid=' + gameId;
                     return;
                 }}
 
                 const choice = data.choice;
                 if (!choice) {{
-                    location.reload();
+                    location.href = '/watch/game?gid=' + gameId;
                     return;
                 }}
 
@@ -1129,17 +1133,23 @@ def watch_game():
 
                         // After highlight animation, advance
                         setTimeout(() => {{
-                            fetch('/watch/advance').then(() => location.reload());
+                            fetch('/watch/advance?gid=' + gameId).then(() => {{
+                                location.href = '/watch/game?gid=' + gameId;
+                            }});
                         }}, 800);
                     }}, 500);
                 }} else {{
                     // Link not found visually, just advance
-                    fetch('/watch/advance').then(() => location.reload());
+                    fetch('/watch/advance?gid=' + gameId).then(() => {{
+                        location.href = '/watch/game?gid=' + gameId;
+                    }});
                 }}
             }})
             .catch(() => {{
                 // On error, just reload
-                setTimeout(() => location.reload(), 1000);
+                setTimeout(() => {{
+                    location.href = '/watch/game?gid=' + gameId;
+                }}, 1000);
             }});
     </script>
     """
@@ -1149,7 +1159,8 @@ def watch_game():
 @app.route("/watch/step")
 def watch_step():
     """AI chooses a link, returns it for scroll animation."""
-    game_id = session.get("ai_game_id")
+    # Read game_id from URL params (HF Spaces doesn't preserve cookies)
+    game_id = request.args.get("gid", "")
     if not game_id or game_id not in _ai_games:
         return jsonify({"error": "no game"}), 404
 
@@ -1164,7 +1175,8 @@ def watch_step():
 @app.route("/watch/advance")
 def watch_advance():
     """Navigate to the pending choice after animation."""
-    game_id = session.get("ai_game_id")
+    # Read game_id from URL params (HF Spaces doesn't preserve cookies)
+    game_id = request.args.get("gid", "")
     if game_id and game_id in _ai_games:
         ai_game_advance(game_id)
     return "", 204
@@ -1172,10 +1184,10 @@ def watch_advance():
 
 @app.route("/watch/stop")
 def watch_stop():
-    game_id = session.get("ai_game_id")
+    # Read game_id from URL params (HF Spaces doesn't preserve cookies)
+    game_id = request.args.get("gid", "")
     if game_id and game_id in _ai_games:
         del _ai_games[game_id]
-    session.pop("ai_game_id", None)
     return redirect(url_for("watch_start"))
 
 
