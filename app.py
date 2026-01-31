@@ -160,7 +160,7 @@ def fetch_wiki_page(title: str) -> tuple[str, list[str]]:
     return result
 
 
-def process_wiki_html(html: str, available_links: list[str], target: str) -> str:
+def process_wiki_html(html: str, available_links: list[str], target: str, nav_base: str = "") -> str:
     soup = BeautifulSoup(html, "html.parser")
     available_lower = {l.lower(): l for l in available_links}
     target_lower = target.lower()
@@ -179,10 +179,10 @@ def process_wiki_html(html: str, available_links: list[str], target: str) -> str
 
         if norm == target_lower:
             a["class"] = a.get("class", []) + ["target-link"]
-            a["href"] = f"/navigate?title={urllib.parse.quote(decoded)}"
+            a["href"] = f"{nav_base}&title={urllib.parse.quote(decoded)}"
         elif norm in available_lower:
             a["class"] = a.get("class", []) + ["available"]
-            a["href"] = f"/navigate?title={urllib.parse.quote(available_lower[norm])}"
+            a["href"] = f"{nav_base}&title={urllib.parse.quote(available_lower[norm])}"
         else:
             a["class"] = a.get("class", []) + ["disabled"]
             if "href" in a.attrs:
@@ -674,7 +674,7 @@ def play_start():
 def start_game():
     start = request.form.get("start", "").strip()
     target = request.form.get("target", "").strip()
-    visualize = request.form.get("visualize") == "1"
+    visualize = "1" if request.form.get("visualize") == "1" else "0"
 
     if not start or not target:
         return redirect(url_for("play_start"))
@@ -688,28 +688,29 @@ def start_game():
             <div class="container"><div class="card"><h2>Error</h2><p>Could not find article: {e}</p><a href="/play" class="btn">Back</a></div></div>
         """, start_time=0)
 
-    session["start"] = start
-    session["target"] = target
-    session["current"] = start
-    session["path"] = [start]
-    session["start_time"] = time.time()
-    session["visualize"] = visualize
-    return redirect(url_for("game"))
+    # Use URL params instead of session (HF Spaces doesn't preserve cookies)
+    return redirect(url_for("game", start=start, target=target, current=start,
+                           path=start, t=int(time.time()), viz=visualize))
 
 
 @app.route("/game")
 def game():
-    if "current" not in session:
+    # Read game state from URL params (HF Spaces doesn't preserve cookies)
+    current = request.args.get("current", "")
+    target = request.args.get("target", "")
+    path_str = request.args.get("path", "")
+    start_time = int(request.args.get("t", 0))
+    visualize = request.args.get("viz", "1") == "1"
+
+    if not current or not target:
         return redirect(url_for("play_start"))
 
-    current = session["current"]
-    target = session["target"]
-    path = session["path"]
-    start_time = session["start_time"]
-    visualize = session.get("visualize", True)
+    path = path_str.split("|") if path_str else [current]
 
     if current.lower() == target.lower():
-        return redirect(url_for("win"))
+        clicks = len(path) - 1
+        elapsed = time.time() - start_time if start_time else 0
+        return redirect(url_for("win_page", clicks=clicks, time=f"{elapsed:.1f}", path=path_str))
 
     try:
         html, links = fetch_wiki_page(current)
@@ -722,9 +723,12 @@ def game():
     # Check if target is in available links
     target_available = target.lower() in [l.lower() for l in links]
 
+    # Build navigation URL with state (for URL-based state passing)
+    nav_base = f"/navigate?target={urllib.parse.quote(target)}&path={urllib.parse.quote(path_str)}&t={start_time}&viz={'1' if visualize else '0'}"
+
     if visualize:
         # Full visual mode with Wikipedia content
-        processed = process_wiki_html(html, links, target)
+        processed = process_wiki_html(html, links, target, nav_base)
         content = f"""
         <div class="game-status">
             <div class="stat"><span>Target:</span> <span class="target">{target}</span></div>
@@ -760,7 +764,7 @@ def game():
 
         target_btn = ""
         if target_available:
-            target_btn = f'<a href="/navigate?title={urllib.parse.quote(target)}" class="btn" style="background:#f1c40f;color:#1a1a2e;font-weight:600;">🎯 Click to WIN: {target}</a>'
+            target_btn = f'<a href="{nav_base}&title={urllib.parse.quote(target)}" class="btn" style="background:#f1c40f;color:#1a1a2e;font-weight:600;">🎯 Click to WIN: {target}</a>'
 
         content = f"""
         <div class="header">
@@ -813,7 +817,7 @@ def game():
             const sel = document.getElementById('link-select');
             if (sel.value) {{
                 document.getElementById('loading-overlay').style.display = 'flex';
-                window.location.href = '/navigate?title=' + sel.value;
+                window.location.href = '{nav_base}&title=' + sel.value;
             }}
         }}
         document.getElementById('link-select').addEventListener('keydown', function(e) {{
@@ -833,33 +837,40 @@ def game():
 
 @app.route("/navigate")
 def navigate():
-    if "current" not in session:
-        return redirect(url_for("play_start"))
+    # Read state from URL params
     title = request.args.get("title", "")
-    if title:
-        session["current"] = title
-        session["path"] = session.get("path", []) + [title]
-    return redirect(url_for("game"))
+    target = request.args.get("target", "")
+    path_str = request.args.get("path", "")
+    start_time = request.args.get("t", "0")
+    visualize = request.args.get("viz", "1")
+
+    if not title or not target:
+        return redirect(url_for("play_start"))
+
+    # Append new title to path
+    new_path = f"{path_str}|{title}" if path_str else title
+
+    return redirect(url_for("game", start=request.args.get("start", ""),
+                           target=target, current=title, path=new_path,
+                           t=start_time, viz=visualize))
 
 
 @app.route("/win")
-def win():
-    if "current" not in session:
-        return redirect(url_for("play_start"))
-
-    path = session["path"]
-    clicks = len(path) - 1
-    elapsed = time.time() - session["start_time"]
-    session.clear()
+def win_page():
+    # Read from URL params
+    clicks = request.args.get("clicks", "0")
+    elapsed = request.args.get("time", "0")
+    path_str = request.args.get("path", "")
+    path = path_str.split("|") if path_str else []
 
     content = f"""
     <div class="header"><h1>Wikipedia Speedrun</h1><div><a href="/">Dashboard</a><a href="/play">Play</a><a href="/watch">Watch AI</a></div></div>
     <div class="container">
         <div class="card win-screen">
             <h1>You Won!</h1>
-            <p style="font-size:1.5rem;"><strong>{clicks}</strong> clicks in <strong>{elapsed:.1f}</strong> seconds</p>
+            <p style="font-size:1.5rem;"><strong>{clicks}</strong> clicks in <strong>{elapsed}</strong> seconds</p>
             <div style="background:#ecf0f1;padding:20px;border-radius:8px;margin:20px 0;text-align:left;">
-                <strong>Your path:</strong><br>{' → '.join(path)}
+                <strong>Your path:</strong><br>{' → '.join(path) if path else 'N/A'}
             </div>
             <a href="/play" class="btn">Play Again</a>
             <a href="/watch" class="btn btn-secondary" style="margin-left:10px;">Watch AI</a>
