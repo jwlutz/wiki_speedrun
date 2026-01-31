@@ -1,5 +1,8 @@
-# Data files (large embeddings/graphs)
-data/
+# Data files (large embeddings/graphs - too big for git)
+data/embeddings.npy
+data/link_graph.msgpack
+data/titles.json
+data/title_to_idx.json
 
 # Claude Code / Vibe
 .claude/

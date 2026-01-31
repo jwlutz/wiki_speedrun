@@ -1,0 +1,324 @@
+{
+  "version": "1.0",
+  "generated": "2026-01-24",
+  "description": "Wikipedia Speedrun Benchmark Problems - 35 curated test cases across 3 difficulty tiers",
+  "problems": [
+    {
+      "id": "easy-001",
+      "start": "Potato",
+      "target": "Barack Obama",
+      "difficulty": "easy",
+      "expected_clicks": "<=3",
+      "tags": ["food-to-person", "classic"]
+    },
+    {
+      "id": "easy-002",
+      "start": "Chess",
+      "target": "Mathematics",
+      "difficulty": "easy",
+      "expected_clicks": "<=3",
+      "tags": ["game-to-concept"]
+    },
+    {
+      "id": "easy-003",
+      "start": "Moon",
+      "target": "Shakespeare",
+      "difficulty": "easy",
+      "expected_clicks": "<=3",
+      "tags": ["astronomy-to-literature"]
+    },
+    {
+      "id": "easy-004",
+      "start": "Banana",
+      "target": "Japan",
+      "difficulty": "easy",
+      "expected_clicks": "<=3",
+      "tags": ["food-to-country"]
+    },
+    {
+      "id": "easy-005",
+      "start": "Water",
+      "target": "History",
+      "difficulty": "easy",
+      "expected_clicks": "<=3",
+      "tags": ["element-to-concept"]
+    },
+    {
+      "id": "easy-006",
+      "start": "Cheese",
+      "target": "France",
+      "difficulty": "easy",
+      "expected_clicks": "<=3",
+      "tags": ["food-to-country"]
+    },
+    {
+      "id": "easy-007",
+      "start": "Basketball",
+      "target": "Michael Jordan",
+      "difficulty": "easy",
+      "expected_clicks": "<=3",
+      "tags": ["sport-to-person", "direct"]
+    },
+    {
+      "id": "easy-008",
+      "start": "Elephant",
+      "target": "Africa",
+      "difficulty": "easy",
+      "expected_clicks": "<=3",
+      "tags": ["animal-to-continent"]
+    },
+    {
+      "id": "easy-009",
+      "start": "Violin",
+      "target": "Germany",
+      "difficulty": "easy",
+      "expected_clicks": "<=3",
+      "tags": ["instrument-to-country"]
+    },
+    {
+      "id": "easy-010",
+      "start": "Tennis",
+      "target": "Computer",
+      "difficulty": "easy",
+      "expected_clicks": "<=3",
+      "tags": ["sport-to-technology"]
+    },
+    {
+      "id": "medium-001",
+      "start": "Pencil",
+      "target": "World War II",
+      "difficulty": "medium",
+      "expected_clicks": "4-6",
+      "tags": ["object-to-event"]
+    },
+    {
+      "id": "medium-002",
+      "start": "Butterfly",
+      "target": "Philosophy",
+      "difficulty": "medium",
+      "expected_clicks": "4-6",
+      "tags": ["animal-to-concept"]
+    },
+    {
+      "id": "medium-003",
+      "start": "Sandwich",
+      "target": "Albert Einstein",
+      "difficulty": "medium",
+      "expected_clicks": "4-6",
+      "tags": ["food-to-person"]
+    },
+    {
+      "id": "medium-004",
+      "start": "Bicycle",
+      "target": "Ancient Rome",
+      "difficulty": "medium",
+      "expected_clicks": "4-6",
+      "tags": ["object-to-era"]
+    },
+    {
+      "id": "medium-005",
+      "start": "Umbrella",
+      "target": "Quantum mechanics",
+      "difficulty": "medium",
+      "expected_clicks": "4-6",
+      "tags": ["object-to-science"]
+    },
+    {
+      "id": "medium-006",
+      "start": "Toothbrush",
+      "target": "French Revolution",
+      "difficulty": "medium",
+      "expected_clicks": "4-6",
+      "tags": ["object-to-event"]
+    },
+    {
+      "id": "medium-007",
+      "start": "Skateboard",
+      "target": "Aristotle",
+      "difficulty": "medium",
+      "expected_clicks": "4-6",
+      "tags": ["object-to-philosopher"]
+    },
+    {
+      "id": "medium-008",
+      "start": "Lighthouse",
+      "target": "Mozart",
+      "difficulty": "medium",
+      "expected_clicks": "4-6",
+      "tags": ["structure-to-composer"]
+    },
+    {
+      "id": "medium-009",
+      "start": "Sushi",
+      "target": "Industrial Revolution",
+      "difficulty": "medium",
+      "expected_clicks": "4-6",
+      "tags": ["food-to-era"]
+    },
+    {
+      "id": "medium-010",
+      "start": "Kangaroo",
+      "target": "Isaac Newton",
+      "difficulty": "medium",
+      "expected_clicks": "4-6",
+      "tags": ["animal-to-scientist"]
+    },
+    {
+      "id": "medium-011",
+      "start": "Volcano",
+      "target": "Leonardo da Vinci",
+      "difficulty": "medium",
+      "expected_clicks": "4-6",
+      "tags": ["geology-to-artist"]
+    },
+    {
+      "id": "medium-012",
+      "start": "Subway",
+      "target": "Renaissance",
+      "difficulty": "medium",
+      "expected_clicks": "4-6",
+      "tags": ["transport-to-era"]
+    },
+    {
+      "id": "medium-013",
+      "start": "Penguin",
+      "target": "Cleopatra",
+      "difficulty": "medium",
+      "expected_clicks": "4-6",
+      "tags": ["animal-to-historical-figure"]
+    },
+    {
+      "id": "medium-014",
+      "start": "Refrigerator",
+      "target": "Napoleon",
+      "difficulty": "medium",
+      "expected_clicks": "4-6",
+      "tags": ["appliance-to-historical-figure"]
+    },
+    {
+      "id": "medium-015",
+      "start": "Telescope",
+      "target": "Pablo Picasso",
+      "difficulty": "medium",
+      "expected_clicks": "4-6",
+      "tags": ["instrument-to-artist"]
+    },
+    {
+      "id": "hard-001",
+      "start": "Pele",
+      "target": "United States",
+      "difficulty": "hard",
+      "expected_clicks": "7-10",
+      "tags": ["obscure-to-popular", "random-start"],
+      "notes": "Brazilian footballer to popular country"
+    },
+    {
+      "id": "hard-002",
+      "start": "Gustav Giemsa",
+      "target": "Google",
+      "difficulty": "hard",
+      "expected_clicks": "7-10",
+      "tags": ["obscure-to-popular", "random-start"],
+      "notes": "German chemist to tech company"
+    },
+    {
+      "id": "hard-003",
+      "start": "Frank Hurley",
+      "target": "World War II",
+      "difficulty": "hard",
+      "expected_clicks": "7-10",
+      "tags": ["obscure-to-popular", "random-start"],
+      "notes": "Australian photographer to major event"
+    },
+    {
+      "id": "hard-004",
+      "start": "Ravi Jagannathan",
+      "target": "Michael Jordan",
+      "difficulty": "hard",
+      "expected_clicks": "7-10",
+      "tags": ["obscure-to-popular", "random-start"],
+      "notes": "Finance professor to basketball legend"
+    },
+    {
+      "id": "hard-005",
+      "start": "Lambert Fieldhouse",
+      "target": "The Beatles",
+      "difficulty": "hard",
+      "expected_clicks": "7-10",
+      "tags": ["obscure-to-popular", "random-start"],
+      "notes": "Sports venue to legendary band"
+    },
+    {
+      "id": "hard-006",
+      "start": "Jeffrey Epstein",
+      "target": "Severna Park, Maryland",
+      "difficulty": "hard",
+      "expected_clicks": "7-10",
+      "tags": ["popular-to-obscure", "random-target"],
+      "notes": "Notorious person to small town"
+    },
+    {
+      "id": "hard-007",
+      "start": "Google",
+      "target": "South Dakota Highway 44",
+      "difficulty": "hard",
+      "expected_clicks": "7-10",
+      "tags": ["popular-to-obscure", "random-target"],
+      "notes": "Tech giant to random highway"
+    },
+    {
+      "id": "hard-008",
+      "start": "The Beatles",
+      "target": "Arkansas Electric Cooperative Corporation",
+      "difficulty": "hard",
+      "expected_clicks": "7-10",
+      "tags": ["popular-to-obscure", "random-target"],
+      "notes": "Legendary band to utility company"
+    },
+    {
+      "id": "hard-009",
+      "start": "United States",
+      "target": "Gustav Giemsa",
+      "difficulty": "hard",
+      "expected_clicks": "7-10",
+      "tags": ["popular-to-obscure", "random-target"],
+      "notes": "Major country to obscure chemist"
+    },
+    {
+      "id": "hard-010",
+      "start": "World War II",
+      "target": "Ronaldinho",
+      "difficulty": "hard",
+      "expected_clicks": "7-10",
+      "tags": ["popular-to-obscure", "random-target"],
+      "notes": "Major event to Brazilian footballer"
+    }
+  ],
+  "model_tiers": {
+    "free": [
+      "google/gemini-2.0-flash-exp:free",
+      "meta-llama/llama-3.3-70b-instruct:free",
+      "mistralai/mistral-small-3.1-24b-instruct:free"
+    ],
+    "budget": [
+      "openai/gpt-4o-mini",
+      "openai/gpt-5-nano",
+      "google/gemini-2.0-flash-001",
+      "deepseek/deepseek-v3.2"
+    ],
+    "fast": [
+      "anthropic/claude-haiku-4.5",
+      "openai/gpt-5-mini",
+      "google/gemini-3-flash-preview"
+    ],
+    "premium": [
+      "anthropic/claude-sonnet-4.5",
+      "openai/gpt-5.2"
+    ]
+  },
+  "embedding_models": [
+    "all-MiniLM-L6-v2",
+    "all-mpnet-base-v2",
+    "BAAI/bge-large-en-v1.5"
+  ]
+}

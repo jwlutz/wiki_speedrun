@@ -1,0 +1,79 @@
+{
+  "fast_models": [
+    {
+      "model": "anthropic/claude-3-haiku",
+      "success": false,
+      "error": "HTTP 402: {\"error\":{\"message\":\"Insufficient credits. Add more using https://openrouter.ai/settings/credits\",\"code\":402}}",
+      "elapsed_seconds": 0.25338292121887207
+    },
+    {
+      "model": "anthropic/claude-3-5-haiku",
+      "success": false,
+      "error": "HTTP 402: {\"error\":{\"message\":\"Insufficient credits. Add more using https://openrouter.ai/settings/credits\",\"code\":402}}",
+      "elapsed_seconds": 0.18253779411315918
+    },
+    {
+      "model": "google/gemini-flash-1.5",
+      "success": false,
+      "error": "HTTP 404: {\"error\":{\"message\":\"No endpoints found for google/gemini-flash-1.5.\",\"code\":404},\"user_id\":\"user_37SvFtiYHuDn5qf5jsX5ZdiAC8b\"}",
+      "elapsed_seconds": 0.1459217071533203
+    },
+    {
+      "model": "google/gemini-2.0-flash-001",
+      "success": false,
+      "error": "HTTP 402: {\"error\":{\"message\":\"Insufficient credits. Add more using https://openrouter.ai/settings/credits\",\"code\":402}}",
+      "elapsed_seconds": 0.16075778007507324
+    },
+    {
+      "model": "openai/gpt-4o-mini",
+      "success": false,
+      "error": "HTTP 402: {\"error\":{\"message\":\"Insufficient credits. Add more using https://openrouter.ai/settings/credits\",\"code\":402}}",
+      "elapsed_seconds": 0.25676465034484863
+    },
+    {
+      "model": "mistralai/mistral-small-24b-instruct-2501",
+      "success": false,
+      "error": "HTTP 402: {\"error\":{\"message\":\"Insufficient credits. Add more using https://openrouter.ai/settings/credits\",\"code\":402}}",
+      "elapsed_seconds": 0.1502394676208496
+    }
+  ],
+  "smart_models": [
+    {
+      "model": "anthropic/claude-3.5-sonnet",
+      "success": false,
+      "error": "HTTP 402: {\"error\":{\"message\":\"Insufficient credits. Add more using https://openrouter.ai/settings/credits\",\"code\":402}}",
+      "elapsed_seconds": 0.16797375679016113
+    },
+    {
+      "model": "anthropic/claude-3-5-sonnet-20241022",
+      "success": false,
+      "error": "HTTP 402: {\"error\":{\"message\":\"Insufficient credits. Add more using https://openrouter.ai/settings/credits\",\"code\":402}}",
+      "elapsed_seconds": 0.1625208854675293
+    },
+    {
+      "model": "openai/gpt-4o",
+      "success": false,
+      "error": "HTTP 402: {\"error\":{\"message\":\"Insufficient credits. Add more using https://openrouter.ai/settings/credits\",\"code\":402}}",
+      "elapsed_seconds": 0.1867060661315918
+    },
+    {
+      "model": "google/gemini-pro-1.5",
+      "success": false,
+      "error": "HTTP 404: {\"error\":{\"message\":\"No endpoints found for google/gemini-pro-1.5.\",\"code\":404},\"user_id\":\"user_37SvFtiYHuDn5qf5jsX5ZdiAC8b\"}",
+      "elapsed_seconds": 0.1637256145477295
+    },
+    {
+      "model": "google/gemini-2.0-pro-exp-02-05",
+      "success": false,
+      "error": "HTTP 400: {\"error\":{\"message\":\"google/gemini-2.0-pro-exp-02-05 is not a valid model ID\",\"code\":400},\"user_id\":\"user_37SvFtiYHuDn5qf5jsX5ZdiAC8b\"}",
+      "elapsed_seconds": 0.12178468704223633
+    },
+    {
+      "model": "deepseek/deepseek-chat",
+      "success": false,
+      "error": "HTTP 402: {\"error\":{\"message\":\"Insufficient credits. Add more using https://openrouter.ai/settings/credits\",\"code\":402}}",
+      "elapsed_seconds": 0.20630812644958496
+    }
+  ],
+  "sample_prompt": "You are playing Wikipedia Speedrun. Navigate from one article to another by clicking links.\n\nCurrent page: \"Potato\"\nTarget page: \"Barack Obama\"\nPath so far: Potato\n\nAvailable links on this page (showing top 20 by relevance):\n- United States\n- Agriculture\n- South America\n- Food\n- Vegetable\n- Plant\n- Europe\n- History\n- World War II\n- International trade\n- Science\n- Economy\n- Government\n- Politics\n- Democratic Party\n- President\n- Washington, D.C.\n- American\n- English language\n- Human\n\nWhich link should you click to get closer to \"Barack Obama\"?\nReply with ONLY the link name, nothing else."
+}

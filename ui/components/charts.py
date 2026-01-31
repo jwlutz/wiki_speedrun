@@ -131,7 +131,7 @@ def create_difficulty_heatmap(results: list[BenchmarkResult], problems: list[dic
     fig.update_layout(
         title="Win% by Difficulty",
         height=280,
-        margin=dict(t=35, b=35, l=100, r=15),
+        margin=dict(t=35, b=35, l=120, r=15),
     )
     return fig
 
@@ -233,7 +233,7 @@ def create_pareto_chart(cost_summaries: list[AgentCostSummary]) -> go.Figure:
         ))
 
     fig.update_layout(
-        title="Cost vs Win Rate (Pareto Frontier)",
+        title="Cost vs Performance",
         xaxis_title="Cost per Game ($)",
         yaxis_title="Win Rate (%)",
         yaxis_range=[80, 102],
@@ -323,9 +323,6 @@ def create_failure_table(failures: list[dict]) -> str:
             <tr>
                 <td style="padding:8px;">{f['start']}</td>
                 <td style="padding:8px;">{f['target']}</td>
-                <td style="padding:8px;text-align:center;">
-                    <span style="background:{badge_color};color:white;padding:3px 8px;border-radius:4px;font-size:11px;font-weight:600;">{diff_label}</span>
-                </td>
                 <td style="padding:8px;text-align:center;font-weight:600;">{diff_score:.0f}</td>
                 <td style="padding:8px;text-align:center;">{avg_clicks:.1f}</td>
                 <td style="padding:8px;text-align:center;color:#e74c3c;font-weight:600;">{f['failure_count']}</td>
@@ -338,8 +335,7 @@ def create_failure_table(failures: list[dict]) -> str:
             <tr style="background:#f8f9fa;border-bottom:2px solid #dee2e6;">
                 <th style="padding:10px;text-align:left;">Start</th>
                 <th style="padding:10px;text-align:left;">Target</th>
-                <th style="padding:10px;text-align:center;">Difficulty</th>
-                <th style="padding:10px;text-align:center;">Score</th>
+                <th style="padding:10px;text-align:center;">Difficulty Score</th>
                 <th style="padding:10px;text-align:center;">Avg Clicks</th>
                 <th style="padding:10px;text-align:center;">Failures</th>
             </tr>

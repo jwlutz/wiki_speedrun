@@ -1,0 +1,43 @@
+# Git
+.git
+.gitignore
+
+# Python
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+.eggs
+*.egg-info
+.pytest_cache
+.mypy_cache
+
+# Virtual environments
+venv
+.venv
+env
+
+# IDE
+.idea
+.vscode
+*.swp
+
+# Test and dev files
+tests/
+.coverage
+htmlcov/
+
+# Large data files (if not needed for demo)
+# data/embeddings.npy
+# data/link_graph.msgpack
+
+# Docs source (images are needed)
+docs/*.md
+
+# Scripts not needed for runtime
+scripts/save_charts.py
+
+# Vibe config
+.vibe/

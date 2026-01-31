@@ -1,3 +1,13 @@
+---
+title: Wikipedia Speedrun
+emoji: 🏃
+colorFrom: green
+colorTo: blue
+sdk: docker
+pinned: false
+license: mit
+---
+
 # Wikipedia Speedrun Benchmark
 
 A benchmark comparing AI agents playing the **Wikipedia Speedrun** game - navigating from one Wikipedia article to another using only the links on each page.
@@ -10,29 +20,44 @@ Wikipedia Speedrun (also known as "Wiki Game" or "Wikipedia Golf") is a game whe
 - **Easy:** Cat -> Dog (semantically close, many shared links)
 - **Medium:** Coffee -> Minecraft (requires creative intermediate hops)
 - **Hard:** Lamprey -> Costco Hot Dog (obscure start, specific target)
-- **Default:** Emperor Penguin -> iPhone (classic benchmark problem)
 
 ## Try It Yourself
 
 Run the Flask app and play in your browser:
 
 ```bash
-python -m ui.flask_app
+python app.py
 ```
 
-Then open http://localhost:5000/play to challenge yourself against our AI agents.
+Then open http://localhost:7860 to play or watch AI agents compete.
 
 ## Benchmark Results
 
-We tested 15 AI agents across 35 unique problems, totaling 420+ games:
+We tested 15 AI agents across 35 unique problems, totaling 420+ games.
 
-| Agent Type | Best Performer | Win Rate | Avg Clicks | Cost/Game |
-|------------|----------------|----------|------------|-----------|
-| **LLM** | gpt-5-mini | 97% | 3.4 | ~$0.02 |
-| **LLM** | gemini-2.0-flash | 97% | 3.5 | ~$0.001 |
-| **Embedding** | bge-large | 94% | 4.1 | FREE |
+### Cost vs Performance
+
+![Cost vs Performance](docs/images/pareto.png)
+
+Points on the yellow Pareto frontier represent optimal cost-performance tradeoffs. Embedding models (green) are free while LLM models (blue) cost per API call.
 
 **Key Finding:** Embedding-based agents achieve 94% win rates at zero cost, while LLMs reach 97% for minimal cost. The Pareto-optimal choices are `bge-large` (free, 94%) and `gemini-2.0-flash` ($0.001/game, 97%).
+
+### Win Rate by Agent
+
+![Win Rate](docs/images/win_rate.png)
+
+### Click Distribution
+
+![Clicks](docs/images/clicks.png)
+
+### Efficiency: Clicks vs Time
+
+![Efficiency](docs/images/efficiency.png)
+
+### Win Rate by Difficulty
+
+![Difficulty](docs/images/difficulty.png)
 
 ## Requirements
 
@@ -42,12 +67,15 @@ We tested 15 AI agents across 35 unique problems, totaling 420+ games:
 ## Installation
 
 ```bash
-pip install -e .
+pip install -r requirements.txt
 ```
 
 ## Quick Start
 
 ```bash
+# Run the web app
+python app.py
+
 # Play with embedding-based agent
 python scripts/play.py --start "Cat" --target "Philosophy" --agent precomputed
 
@@ -56,9 +84,6 @@ python scripts/play.py --start "Potato" --target "Barack Obama" --agent llm --mo
 
 # Run benchmark
 python scripts/quick_benchmark.py
-
-# Start web dashboard
-python -m ui.flask_app
 ```
 
 ## Agents
@@ -104,17 +129,19 @@ Place these files in the `data/` directory:
 
 ```
 wiki_speedrun/
+├── app.py              # Main Flask application
 ├── src/
-│   ├── agents/          # AI agent implementations
-│   ├── data/            # Data loading utilities
-│   └── game/            # Game logic
+│   ├── agents/         # AI agent implementations
+│   ├── data/           # Data loading utilities
+│   └── game/           # Game logic
 ├── ui/
-│   ├── flask_app.py     # Web interface
-│   └── components/      # Dashboard charts
+│   └── components/     # Dashboard charts
 ├── scripts/
-│   ├── play.py          # CLI game runner
+│   ├── play.py         # CLI game runner
 │   └── quick_benchmark.py
-└── data/                # Benchmark data and results
+├── docs/
+│   └── images/         # README charts
+└── data/               # Benchmark data and results
 ```
 
 ## License

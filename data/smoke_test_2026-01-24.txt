@@ -1,0 +1,154 @@
+[stderr] WARNING:src.agents.llm:LLM returned invalid link 'Maryland', using embedding fallback
+[stderr] WARNING:src.agents.llm:LLM returned invalid link 'Maryland', using embedding fallback
+[stderr] WARNING:src.agents.llm:LLM returned invalid link 'Maryland', using embedding fallback
+[stderr] WARNING:src.agents.llm:LLM returned invalid link 'Maryland', using embedding fallback
+[stderr] WARNING:src.agents.llm:LLM returned invalid link 'Maryland', using embedding fallback
+[stderr] WARNING:src.agents.llm:LLM returned invalid link 'Maryland', using embedding fallback
+[stderr] WARNING:src.agents.llm:LLM returned invalid link 'Maryland', using embedding fallback
+[stderr] WARNING:src.agents.llm:LLM returned invalid link 'Maryland', using embedding fallback
+[stderr] WARNING:src.agents.llm:LLM returned invalid link 'Maryland', using embedding fallback
+[stderr] WARNING:src.agents.llm:LLM returned invalid link 'Maryland', using embedding fallback
+[stderr] WARNING:src.agents.llm:LLM returned invalid link 'Maryland', using embedding fallback
+[stderr] WARNING:src.agents.llm:LLM returned invalid link 'Maryland', using embedding fallback
+[stderr] WARNING:src.agents.llm:LLM returned invalid link 'Maryland', using embedding fallback
+[stderr] WARNING:src.agents.llm:LLM returned invalid link 'Crime in Baltimore', using embedding fallback
+[stderr] WARNING:src.agents.llm:LLM returned invalid link 'Crime in Baltimore', using embedding fallback
+[stderr] WARNING:src.agents.llm:LLM returned invalid link 'None of the links are likely to lead to "Jeffrey E', using embedding fallback
+[stderr] WARNING:src.agents.llm:LLM returned invalid link 'Supreme Court of the United States', using embedding fallback
+[stderr] WARNING:src.agents.llm:LLM returned invalid link 'White-collar crime', using embedding fallback
+[stderr] WARNING:src.agents.llm:LLM returned invalid link 'Federal Bureau of Investigation', using embedding fallback
+[stderr] WARNING:src.agents.llm:LLM API error: HTTPSConnectionPool(host='openrouter.ai', port=443): Read timed out. (read timeout=60), using embedding fallback
+==========================================================================================
+SMOKE TEST: 5 Cases × 10 LLM Models (Small vs Big)
+==========================================================================================
+Comparing small/fast models vs big/smart models (Jan 2026)
+
+==========================================================================================
+EASY: Espresso → Leonardo da Vinci
+Expected: 3-5 clicks expected
+==========================================================================================
+
+Agent                                      Result  Clicks   LLM?     Time
+---------------------------------------------------------------------------
+gpt-4o-mini                                   WIN       2    Yes     1.0s
+gpt-5-mini                                    WIN       9    Yes    43.0s
+deepseek-chat                                 WIN       2    Yes     4.3s
+gemini-2.0-flash-lite-001                     WIN       2    Yes     1.0s
+gemini-3-flash-preview                        WIN       2    Yes     1.3s
+claude-haiku-4.5                              WIN       2    Yes     1.3s
+gpt-5.2-chat                                  WIN       9    Yes    22.1s
+deepseek-v3.2                                 WIN       2    Yes     2.5s
+gemini-3-pro-preview                          WIN       9    Yes    36.0s
+claude-sonnet-4.5                             WIN       2    Yes     1.5s
+
+==========================================================================================
+MEDIUM: IKEA → Cleopatra
+Expected: 8-12 clicks expected
+==========================================================================================
+
+Agent                                      Result  Clicks   LLM?     Time
+---------------------------------------------------------------------------
+gpt-4o-mini                                   WIN       4    Yes     2.8s
+gpt-5-mini                                   LOST     >30    Yes   155.7s
+deepseek-chat                                 WIN       4    Yes     4.2s
+gemini-2.0-flash-lite-001                     WIN       3    Yes     2.1s
+gemini-3-flash-preview                        WIN       4    Yes     4.3s
+claude-haiku-4.5                              WIN       4    Yes     3.9s
+gpt-5.2-chat                                 LOST     >30   FALL    80.9s
+  (Used embedding fallback - LLM rate limited)
+deepseek-v3.2                                 WIN       4    Yes     6.9s
+gemini-3-pro-preview                         LOST     >30    Yes   131.3s
+claude-sonnet-4.5                             WIN       4    Yes     7.5s
+
+==========================================================================================
+HARD: Fortnite → Bubonic plague
+Expected: 10-20 clicks expected
+==========================================================================================
+
+Agent                                      Result  Clicks   LLM?     Time
+---------------------------------------------------------------------------
+gpt-4o-mini                                   WIN       5    Yes     6.5s
+gpt-5-mini                                   LOST     >30    Yes   175.3s
+deepseek-chat                                 WIN       4    Yes     5.1s
+gemini-2.0-flash-lite-001                     WIN       4    Yes     2.0s
+gemini-3-flash-preview                        WIN       5    Yes     6.3s
+claude-haiku-4.5                              WIN       4    Yes     3.1s
+gpt-5.2-chat                                  WIN      15    Yes    44.1s
+deepseek-v3.2                                 WIN       4    Yes     7.7s
+gemini-3-pro-preview                         LOST     >30    Yes   135.2s
+claude-sonnet-4.5                             WIN       4    Yes     4.5s
+
+==========================================================================================
+TRICKY: Jeffrey Epstein → Severna Park, Maryland
+Expected: unknown
+==========================================================================================
+
+Agent                                      Result  Clicks   LLM?     Time
+---------------------------------------------------------------------------
+gpt-4o-mini                                   WIN       5    Yes     4.4s
+gpt-5-mini                                   LOST     >30    Yes   149.7s
+deepseek-chat                                 WIN       7   FALL    10.9s
+  (Used embedding fallback - LLM rate limited)
+gemini-2.0-flash-lite-001                     WIN       6    Yes     4.2s
+gemini-3-flash-preview                        WIN       4    Yes     4.0s
+claude-haiku-4.5                              WIN      18   FALL    26.7s
+  (Used embedding fallback - LLM rate limited)
+gpt-5.2-chat                                 LOST     >30    Yes    82.4s
+deepseek-v3.2                                 WIN       9   FALL    28.2s
+  (Used embedding fallback - LLM rate limited)
+gemini-3-pro-preview                         LOST     >30    Yes   160.5s
+claude-sonnet-4.5                             WIN       5    Yes    18.1s
+
+==========================================================================================
+TRICKY: Severna Park, Maryland → Jeffrey Epstein
+Expected: unknown
+==========================================================================================
+
+Agent                                      Result  Clicks   LLM?     Time
+---------------------------------------------------------------------------
+gpt-4o-mini                                   WIN       8   FALL     7.7s
+  (Used embedding fallback - LLM rate limited)
+gpt-5-mini                                   LOST     >30    Yes    82.6s
+deepseek-chat                                 WIN       3    Yes     3.4s
+gemini-2.0-flash-lite-001                     WIN      10   FALL     7.9s
+  (Used embedding fallback - LLM rate limited)
+gemini-3-flash-preview                        WIN       3    Yes     2.8s
+claude-haiku-4.5                              WIN      15   FALL    17.1s
+  (Used embedding fallback - LLM rate limited)
+gpt-5.2-chat                                 LOST     >30   FALL   141.6s
+  (Used embedding fallback - LLM rate limited)
+deepseek-v3.2                                 WIN       6    Yes     6.5s
+gemini-3-pro-preview                         LOST     >30    Yes   151.7s
+claude-sonnet-4.5                             WIN       7    Yes    17.5s
+
+
+==========================================================================================
+SUMMARY BY MODEL
+==========================================================================================
+
+Agent                                             Wins  AvgClicks    AvgTime
+---------------------------------------------------------------------------
+llm-gemini-3-flash-preview                         5/5        3.6       3.8s
+llm-deepseek-chat                                  5/5        4.0       5.6s
+llm-claude-sonnet-4.5                              5/5        4.4       9.8s
+llm-gpt-4o-mini                                    5/5        4.8       4.5s
+llm-gemini-2.0-flash-lite-001                      5/5        5.0       3.5s
+llm-deepseek-v3.2                                  5/5        5.0      10.4s
+llm-claude-haiku-4.5                               5/5        8.6      10.4s
+llm-gpt-5.2-chat                                   2/5       12.0      33.1s
+llm-gpt-5-mini                                     1/5        9.0      43.0s
+llm-gemini-3-pro-preview                           1/5        9.0      36.0s
+
+==========================================================================================
+TOP 5 LLM RECOMMENDATIONS
+==========================================================================================
+1. gemini-3-flash-preview
+   Wins: 5/3, Avg clicks: 3.6, Avg time: 3.8s
+2. deepseek-chat
+   Wins: 5/3, Avg clicks: 4.0, Avg time: 5.6s
+3. claude-sonnet-4.5
+   Wins: 5/3, Avg clicks: 4.4, Avg time: 9.8s
+4. gpt-4o-mini
+   Wins: 5/3, Avg clicks: 4.8, Avg time: 4.5s
+5. gemini-2.0-flash-lite-001
+   Wins: 5/3, Avg clicks: 5.0, Avg time: 3.5s
