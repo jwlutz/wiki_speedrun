@@ -1,3 +1,13 @@
+---
+title: Wikipedia Speedrun
+emoji: 🏃
+colorFrom: green
+colorTo: blue
+sdk: docker
+pinned: false
+license: mit
+---
+
 # Wikipedia Speedrun Benchmark
 
 [Try it live](https://huggingface.co/spaces/jwlutz/wiki-speedrun)
