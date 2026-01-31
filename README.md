@@ -1,14 +1,6 @@
----
-title: Wikipedia Speedrun
-emoji: 🏃
-colorFrom: green
-colorTo: blue
-sdk: docker
-pinned: false
-license: mit
----
-
 # Wikipedia Speedrun Benchmark
+
+[Try it live](https://huggingface.co/spaces/jwlutz/wiki-speedrun)
 
 A benchmark comparing AI agents playing the **Wikipedia Speedrun** game - navigating from one Wikipedia article to another using only the links on each page.
 
@@ -58,92 +50,3 @@ Points on the yellow Pareto frontier represent optimal cost-performance tradeoff
 ### Win Rate by Difficulty
 
 ![Difficulty](docs/images/difficulty.png)
-
-## Requirements
-
-- Python 3.11+
-- OpenRouter API key (for LLM agents)
-
-## Installation
-
-```bash
-pip install -r requirements.txt
-```
-
-## Quick Start
-
-```bash
-# Run the web app
-python app.py
-
-# Play with embedding-based agent
-python scripts/play.py --start "Cat" --target "Philosophy" --agent precomputed
-
-# Play with LLM agent (any OpenRouter model ID)
-python scripts/play.py --start "Potato" --target "Barack Obama" --agent llm --model google/gemini-2.0-flash-001
-
-# Run benchmark
-python scripts/quick_benchmark.py
-```
-
-## Agents
-
-| Agent | Description | Cost |
-|-------|-------------|------|
-| `precomputed` | Greedy using pre-computed title embeddings | Free |
-| `live` | Greedy using on-the-fly sentence-transformers | Free |
-| `hybrid` | Pre-computed filter + live re-rank | Free |
-| `oracle` | BFS optimal path (uses pre-computed graph) | Free |
-| `llm` | LLM via OpenRouter (use `--model` to specify) | Varies |
-| `human` | Manual play in browser | Free |
-| `random` | Random baseline | Free |
-
-## LLM Models
-
-Use any OpenRouter model ID with `--model`:
-
-```bash
-# Free models
---model google/gemini-2.0-flash-exp:free
---model meta-llama/llama-3.3-70b-instruct:free
-
-# Budget models
---model openai/gpt-4o-mini
---model deepseek/deepseek-chat
-
-# Premium models
---model anthropic/claude-sonnet-4
---model openai/gpt-5-mini
-```
-
-## Data Requirements
-
-Place these files in the `data/` directory:
-- `embeddings.npy` - Article embeddings (18.5M titles, 384-dim, float16)
-- `link_graph.msgpack` - Wikipedia link graph (7.1M articles)
-- `titles.json` - Article titles
-- `title_to_idx.json` - Title to index mapping
-- `openrouter_models.json` - OpenRouter model catalog with pricing
-
-## Project Structure
-
-```
-wiki_speedrun/
-├── app.py              # Main Flask application
-├── src/
-│   ├── agents/         # AI agent implementations
-│   ├── data/           # Data loading utilities
-│   └── game/           # Game logic
-├── ui/
-│   └── components/     # Dashboard charts
-├── scripts/
-│   ├── play.py         # CLI game runner
-│   └── quick_benchmark.py
-├── docs/
-│   └── images/         # README charts
-└── data/               # Benchmark data and results
-```
-
-## License
-
-MIT
