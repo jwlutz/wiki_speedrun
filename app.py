@@ -22,6 +22,10 @@ import numpy as np
 app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY", "wiki-speedrun-dev-key")
 
+# Session config for HF Spaces (behind reverse proxy)
+app.config["SESSION_COOKIE_SAMESITE"] = "Lax"
+app.config["SESSION_COOKIE_SECURE"] = False  # HF proxy handles HTTPS
+
 # ====================
 # Data Loading
 # ====================
